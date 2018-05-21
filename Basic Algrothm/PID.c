@@ -108,7 +108,7 @@ float ProPIDCal(ProPID p,float MessureValue)
     
    //开始增量计算
 
-   templ=(p.P)*pError+(p.I)*iError+(p.D)*dError;
+   templ=(p.P)*pError+(p.I)*iError+(p.D)*dError;//ss
 
    if(Abs(p.Errors)>(p.M1))    //规则1
    {
