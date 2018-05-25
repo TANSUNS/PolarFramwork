@@ -1,6 +1,7 @@
-#include <Filter.c>
+#include <Filter.h>
 #include <stdlib.h>
-
+#include <stm32f10x.h>
+#define DFT_T float
 //函数名字 ABS(DFT_T NUM)
 //函数说明 取绝对值得函数
 //参数 NUM  ：需要取绝对值的值
@@ -102,7 +103,7 @@ uint8_t LimFilterInit(LimFilterObj *p,DFT_T Error)
 
 DFT_T LimFilter(LimFilterObj *p,DFT_T CrtVal)
 {    
-    if(ABS((CrtVal-p->LstVl)>=p->Error)
+    if(ABS((CrtVal-p->LstVl))>=p->Error)
     {
         if(p->FstFlg==1)
         {
@@ -165,10 +166,11 @@ DFT_T SldAvrgFilter_I(SldAvrgFilterObj *p,DFT_T CrtVal)
 //返回值：1:设置成功
 
 uint8_t SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,int *C)
-    p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
+{
+  p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
     p->N=N;
     p->Coe=C;
-    for(int i=0;i<N,i++)
+    for(int i=0;i<N;i++)
     {
         p->SumCoe+=C[i];
     }
@@ -189,7 +191,7 @@ DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal)
     for(i=0;i<p->N;i++)
     {
         p->Filter_buf[i]=p->Filter_buf[i+1];
-        Sum+=p->Filter_buf[i]*(p->Coe[i])
+        Sum+=p->Filter_buf[i]*(p->Coe[i]);
     }
     p->Output=Sum/p->SumCoe;
     return p->Output;
@@ -204,6 +206,7 @@ DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal)
 uint8_t MVFilterInit(MVFilterObj *p,int N)
 {
     p->N=N;
+    return 1;
 }
 
 //函数名字  SldAvrgFilter_II(SldAvrgFilterObj *P,DFT_T CrtVal)
