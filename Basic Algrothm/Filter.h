@@ -42,7 +42,19 @@ typedef struct
 extern uint8_t LimFilterInit(LimFilterObj *p,DFT_T Error);
 extern DFT_T LimFilter(LimFilterObj *p,DFT_T CrtVal);]
 
-//Sliding average filter I I类滑动平均滤波 适用于采样速度较慢或要求数据更新率较高的实时系统
+//Sliding average filter I 
+//I类滑动平均滤波 适用于采样速度较慢或要求数据更新率较高的实时系统
+ //对周期性干扰有良好的抑制作用，平滑度高；
+ //   适用于高频振荡的系统。
+ //   灵敏度低，对偶然出现的脉冲性干扰的抑制作用较差；
+ //   不易消除由于脉冲干扰所引起的采样值偏差；
+  //  不适用于脉冲干扰比较严重的场合；
+
+//II类加权平均滤波
+//给予新采样值的权系数越大，则灵敏度越高，但信号平滑度越低。
+//   适用于有较大纯滞后时间常数的对象，和采样周期较短的系统。
+//   对于纯滞后时间常数较小、采样周期较长、变化缓慢的信号；
+//   不能迅速反应系统当前所受干扰的严重程度，滤波效果差。
 
 
 typedef struct
@@ -50,11 +62,18 @@ typedef struct
     int N;//滤波器的特征值N
     DFT_T *Filter_buf;//指向滤波器滤波数据的指针
     DFT_T Output;
+    int *Coe; //加权系数表
+    DFT_T SumCoe;//加权系数和
+
 }SldAvrgFilterObj;
 
 //APIS
-extern uint8_t SldAvrgFilterInit(SldAvrgFilterObj *p,int N);
-extern DFT_T SldAvrgFilter(SldAvrgFilterObj *P,DFT_T CrtVal);
+extern uint8_t SldAvrgFilter_I_Init(SldAvrgFilterObj *p,int N);
+extern uint8_t SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,int *C);
+extern DFT_T SldAvrgFilter_I(SldAvrgFilterObj *p,DFT_T CrtVal);
+extern DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal);
+
+
 
 
 

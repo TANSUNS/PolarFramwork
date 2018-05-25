@@ -1,4 +1,5 @@
 #include <Filter.c>
+#include <stdlib.h>
 
 //函数名字 ABS(DFT_T NUM)
 //函数说明 取绝对值得函数
@@ -123,3 +124,75 @@ DFT_T LimFilter(LimFilterObj *p,DFT_T CrtVal)
         return CrtVal;
     }
 }
+
+//函数名字   SldAvrgFilter_I_Init(SldAvrgFilterObj *p,int N)
+//函数说明 用于I类滑动滤波函数的句柄初始化
+//参数 SldAvrgFilterObj *p：滑动滤波函数控制结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
+//参数 N ：滑动器的滑动范围 
+//N建议取值:流量，N=12；压力，N=4；液面，N=4-12；温度，N=1-4
+//返回值：1:设置成功
+
+uint8_t SldAvrgFilter_I_Init(SldAvrgFilterObj *p,int N)
+{
+    p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
+    p->N=N;
+    return 1;
+}
+
+//函数名字  SldAvrgFilter_I(SldAvrgFilterObj *P,DFT_T CrtVal)
+//函数说明 用于滑动滤波I类，未加权
+//参数 SldAvrgFilterObj *p：滑动滤波函数控制结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
+//参数 CrtVal ：滤波的值的当前值
+//返回值：滤波后的值
+DFT_T SldAvrgFilter_I(SldAvrgFilterObj *p,DFT_T CrtVal)
+{
+    DFT_T Sum;
+    p->Filter_buf[p->N]=CrtVal;
+    for(int i=0;i<p->N;i++)
+    {
+        p->Filter_buf[i]=p->Filter_buf[i+1];
+        Sum+=p->Filter_buf[i];
+    }
+    p->Output=Sum/p->N;
+    return p->Output;
+}
+//SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,DFT_T *C) SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N)
+//函数说明 用于II类滑动滤波函数的句柄初始化
+//参数 SldAvrgFilterObj *p：滑动滤波函数控制结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
+//参数 N ：滑动器的滑动范围 
+//N建议取值:流量，N=12；压力，N=4；液面，N=4-12；温度，N=1-4   ALL：3-14
+//参数 *C:加权表的设置
+//返回值：1:设置成功
+
+uint8_t SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,int *C)
+    p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
+    p->N=N;
+    p->Coe=C;
+    for(int i=0;i<N,i++)
+    {
+        p->SumCoe+=C[i];
+    }
+    return 1;
+}
+
+//函数名字  SldAvrgFilter_II(SldAvrgFilterObj *P,DFT_T CrtVal)
+//函数说明 用于滑动滤波I类，加权
+//参数 SldAvrgFilterObj *p：滑动滤波函数控制结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
+//参数 CrtVal ：滤波的值的当前值
+//返回值：滤波后的值
+
+DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal)
+{
+    int i;
+    int Sum;
+    p->Filter_buf[p->N]=CrtVal;
+    for(i=0;i<p->N;i++)
+    {
+        p->Filter_buf[i]=p->Filter_buf[i+1];
+        Sum+=p->Filter_buf[i]*(p->Coe[i])
+    }
+    p->Output=Sum/p->SumCoe;
+    return p->Output;
+}
+
+
