@@ -73,9 +73,24 @@ extern uint8_t SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,int *C);
 extern DFT_T SldAvrgFilter_I(SldAvrgFilterObj *p,DFT_T CrtVal);
 extern DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal);
 
+//median-value filter 防脉冲干扰平均滤波法
+//融合了“中位值滤波法”+“算术平均滤波法”两种滤波法的优点。
+//    对于偶然出现的脉冲性干扰，可消除由其所引起的采样值偏差。
+//    对周期干扰有良好的抑制作用。
+//    平滑度高，适于高频振荡的系统。
+//    计算速度较慢，和算术平均滤波法一样。
+
+typedef struct
+{
+    int N;
+    DFT_T *Filter_buf;
+    DFT_T Output;
+
+}MVFilterObj;
 
 
-
+extern uint8_t MVFilterInit(MVFilterObj *p,int N);
+extern DFT_T MVfilter(MVFilterObj *p,DFT_T *CrtVal);
 
 
 

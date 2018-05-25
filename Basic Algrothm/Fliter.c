@@ -195,4 +195,50 @@ DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal)
     return p->Output;
 }
 
+//函数名字   MVFilterInit(MVFilterObj *p,int N)
+//函数说明 用于防脉冲冲击滤波函数的句柄初始化
+//参数 MVFilterObj *p：MV控制参数的结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
+//参数N ：数据采集的特征值  建议值 》10
+//返回值：1:设置成功
+
+uint8_t MVFilterInit(MVFilterObj *p,int N)
+{
+    p->N=N;
+}
+
+//函数名字  SldAvrgFilter_II(SldAvrgFilterObj *P,DFT_T CrtVal)
+//函数说明 用于中值平均滤波类，可以有效抑制冲击带来的偏差
+//参数 SldAvrgFilterObj *p：滑动滤波函数控制结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
+//参数 CrtVal ：滤波的值的当前值,是一个数据，本函数采用组运算
+//返回值：滤波后的值
+
+DFT_T MVfilter(MVFilterObj *p,DFT_T *CrtVal)
+{
+    int i;
+    int j;
+    DFT_T filter_temp;
+    DFT_T Sum;
+
+   for(j = 0; j < p->N - 1; j++)  //冒泡排序
+    {
+    for(i = 0; i < p->N - 1 - j; i++) 
+    {
+      if(p->Filter_buf[i] >p-> Filter_buf[i + 1]) 
+      {
+        filter_temp = p->Filter_buf[i];
+        p->Filter_buf[i] = p->Filter_buf[i + 1];
+        p->Filter_buf[i + 1] = filter_temp;
+      }
+    }
+  }
+
+   for(i = 1; i < p->N - 1; i++)
+    Sum += p->Filter_buf[i];
+
+p->Output=Sum / (p->N - 2);
+return  p->Output;
+
+
+}
+
 
