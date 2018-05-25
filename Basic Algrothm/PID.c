@@ -17,16 +17,12 @@ float PIDCal(PID p,float ThisError,float *out)
     pError =ThisError-(p.LastError);
     iError =ThisError;
     dError =ThisError-2*(p.LastError)+(p.PreError);
-   
-//    printf("A:%f\n",pError);
-//    printf("B:%f\n",iError);
-//    printf("C:%f\n",dError);
-    
+       
    //开始增量计算
     A=(p.P)*pError;
     B=(p.I)*iError;
     C=(p.D)*dError;
-   templ=A+B+C;
+    templ=A+B+C;
 
    //开始平移储存
    
