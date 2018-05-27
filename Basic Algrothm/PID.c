@@ -8,7 +8,6 @@ float PIDError(PID p,float CurrentValue)
 }
 
 
-
 float PIDCal(PID p,float ThisError,float *out)
 {
     float pError,dError,iError;
