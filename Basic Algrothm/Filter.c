@@ -1,6 +1,7 @@
 #include <Filter.h>
 #include <stdlib.h>
 #include <stm32f10x.h>
+#include <IncludeList.h>
 
 
 #define DFT_T float
@@ -169,7 +170,7 @@ DFT_T SldAvrgFilter_I(SldAvrgFilterObj *p,DFT_T CrtVal)
 
 uint8_t SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,int *C)
 {
-  p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
+  p->Filter_buf=(DFT_T *)malloc(sizeof(DFT_T)*(N+1));
     p->N=N;
     p->Coe=C;
     for(int i=0;i<N;i++)

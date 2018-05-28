@@ -1,7 +1,8 @@
 #include <stm32f10x.h>
 #include <Polar_IT.h>
 
-extern uint8_t InterruptInit(u8 *ChannelTable,u8 *PriorityTable,u8 *SubPriorityTable)
+
+extern uint8_t InterruptInit(IRQn_Type *ChannelTable,u8 *PriorityTable,u8 *SubPriorityTable)
 {
     int TableLength;
     u8 Max=0;
@@ -44,19 +45,40 @@ PeriphInterruptInit();
 return 1;
 }
 
-CloseInterrupt(u8 Channel)
+void CloseInterrupt(IRQn_Type Channel)
 {
-     NVIC_InitTypeDef N;
-    N.NVIC_IRQChannel=Channel;
-    N.NVIC_IRQChannelCmd=DISABLE;
-    NVIC_Init(&N);
-    return 1;
-  
+    NVIC_DisableIRQ(Channel);
+
 }
 
- uint8_t OpenInterrupt(u8 Channal,u8 Priority,u8 SubPriority)
+void CloseAllInterrupt(IRQn_Type *ChannelTable)
 {
-    N.NVIC_IRQChannelCmd=ENABLE;
+    int SIZE=sizeof(ChannelTable)/sizeof(ChannelTable[0]);
+    for(int i=0;i<SIZE;i++)
+    {
+          NVIC_DisableIRQ(ChannelTable[i]);
+    }
+}
+
+void OpenInterrupt(IRQn_Type Channel)
+{
+     NVIC_EnableIRQ(Channel);
+}
+
+void OpenAllInterrupt(IRQn_Type *ChannelTable)
+{
+    int SIZE=sizeof(ChannelTable)/sizeof(ChannelTable[0]);
+    for(int i=0;i<SIZE;i++)
+    {
+          NVIC_EnableIRQ(ChannelTable[i]);
+    }
+
+}
+
+ uint8_t ReSetChannel(u8 Channal,u8 Priority,u8 SubPriority)
+{
+    NVIC_InitTypeDef N;
+    N.NVIC_IRQChannelCmd=ENABLE;//
     N.NVIC_IRQChannel=Channel;
     N.NVIC_IRQChannelPreemptionPriority=Priority;
     N.NVIC_IRQChannelSubPriority=SubPriority;
@@ -65,7 +87,8 @@ CloseInterrupt(u8 Channel)
 
 }
 
-uint8_t PeriphInterruptInit(void)
+
+uint8_t PeriphInterruptInit()
 {
     //用户需要在这里填写PPP_Config函数，并在stm32f10x_it中添加自己的中断处理函数。
 }
