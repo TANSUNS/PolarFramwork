@@ -51,7 +51,7 @@ float DSP_PIDCal(DSP_PID *p,float CurrentValue)//PID计算函数
     q15_t temp,out;
     float fout;
     arm_float_to_q15(&CurrentValue,&temp,1);
-     out=arm_pid_q15(&(p->Ctrl)，temp);
+     out=arm_pid_q15(&(p->Ctrl),temp);
     arm_q15_to_float(&out,&fout,1);
     return fout;
 
@@ -61,7 +61,7 @@ void DSP_PIDInit(DSP_PID *p,float Pro,float Inte,float Del)
 {
     p->Ctrl.Kp=Pro;
     p->Ctrl.Ki=Inte;
-    p->Ctrl.kd=Del;
+    p->Ctrl.Kd=Del;
     arm_pid_init_q15(&((*p).Ctrl),1);
 
 }

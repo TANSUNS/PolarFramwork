@@ -1,10 +1,8 @@
-#include <Filter.h>
-#include <stdlib.h>
-#include <stm32f10x.h>
-#include <IncludeList.h>
+#include "Filter.h"
+#include "stdint.h"
+#include "stdlib.h"
 
-
-#define DFT_T float
+#define DFT_T float   //Setting the default type of this Algorithm
 //函数名字 ABS(DFT_T NUM)
 //函数说明 取绝对值得函数
 //参数 NUM  ：需要取绝对值的值
@@ -170,7 +168,7 @@ DFT_T SldAvrgFilter_I(SldAvrgFilterObj *p,DFT_T CrtVal)
 
 uint8_t SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,int *C)
 {
-  p->Filter_buf=(DFT_T *)malloc(sizeof(DFT_T)*(N+1));
+  p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
     p->N=N;
     p->Coe=C;
     for(int i=0;i<N;i++)
@@ -209,12 +207,11 @@ DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal)
 uint8_t MVFilterInit(MVFilterObj *p,int N)
 {
     p->N=N;
-    return 1;
 }
 
-//函数名字  MVfilter(MVFilterObj *p,DFT_T *CrtVal)
+//函数名字  SldAvrgFilter_II(SldAvrgFilterObj *P,DFT_T CrtVal)
 //函数说明 用于中值平均滤波类，可以有效抑制冲击带来的偏差
-//参数MVFilterObj *p：滑动滤波函数控制结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
+//参数 SldAvrgFilterObj *p：滑动滤波函数控制结构体 其名字最好与限幅参数的名字类似 ：NAME_RS；
 //参数 CrtVal ：滤波的值的当前值,是一个数据，本函数采用组运算
 //返回值：滤波后的值
 

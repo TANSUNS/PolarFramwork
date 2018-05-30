@@ -2,21 +2,14 @@
 //General Filter(FLOATING)//
 //2018.5.15    Version 1.2
 
-#include <stdlib.h>
-#include <stdint.h>
-#include <stm32f10x.h>
 
 #ifndef __FILTER_H__
 #define __FILTER_H__
-
-
+#include "stdint.h"
 #define DFT_T float   //Setting the default type of this Algorithms
-//COM 
 extern DFT_T ABS(DFT_T NUM);
 
-
 //Range Security 范围保护
-
 typedef struct
 {
     DFT_T UppLmt;//upperLimit
@@ -95,7 +88,5 @@ typedef struct
 
 extern uint8_t MVFilterInit(MVFilterObj *p,int N);
 extern DFT_T MVfilter(MVFilterObj *p,DFT_T *CrtVal);
-
-
 
 #endif
