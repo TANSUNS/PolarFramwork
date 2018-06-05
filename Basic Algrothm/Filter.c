@@ -1,6 +1,8 @@
-#include <Filter.c>
-#include <stdlib.h>
+#include "Filter.h"
+#include "stdint.h"
+#include "stdlib.h"
 
+#define DFT_T float   //Setting the default type of this Algorithm
 //函数名字 ABS(DFT_T NUM)
 //函数说明 取绝对值得函数
 //参数 NUM  ：需要取绝对值的值
@@ -58,6 +60,7 @@ DFT_T RangeSecure_I(RgSecrObj *p, DFT_T CrtVal)
     p->Output=CrtVal;
     return p->Output;
 }
+
 //函数名字 RangeSecure_II(RgSecrObj *p, DFT_T CrtVal)
 //函数说明 ：第二类数字范围保护，大于范围取上一次输出值
 //参数 RgSecrObj *p ：需要限定范围参数的结构体 其名字最好与保护参数的名字类似 ：NAME_RS；
@@ -102,7 +105,7 @@ uint8_t LimFilterInit(LimFilterObj *p,DFT_T Error)
 
 DFT_T LimFilter(LimFilterObj *p,DFT_T CrtVal)
 {    
-    if(ABS((CrtVal-p->LstVl)>=p->Error)
+    if(ABS((CrtVal-p->LstVl))>=p->Error)
     {
         if(p->FstFlg==1)
         {
@@ -165,10 +168,11 @@ DFT_T SldAvrgFilter_I(SldAvrgFilterObj *p,DFT_T CrtVal)
 //返回值：1:设置成功
 
 uint8_t SldAvrgFilter_II_Init(SldAvrgFilterObj *p,int N,int *C)
-    p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
+{
+  p->Filter_buf=malloc(sizeof(DFT_T)*(N+1));
     p->N=N;
     p->Coe=C;
-    for(int i=0;i<N,i++)
+    for(int i=0;i<N;i++)
     {
         p->SumCoe+=C[i];
     }
@@ -189,7 +193,7 @@ DFT_T SldAvrgFilter_II(SldAvrgFilterObj *p,DFT_T CrtVal)
     for(i=0;i<p->N;i++)
     {
         p->Filter_buf[i]=p->Filter_buf[i+1];
-        Sum+=p->Filter_buf[i]*(p->Coe[i])
+        Sum+=p->Filter_buf[i]*(p->Coe[i]);
     }
     p->Output=Sum/p->SumCoe;
     return p->Output;

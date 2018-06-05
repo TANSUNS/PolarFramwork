@@ -3,13 +3,10 @@
 //2018.5.15    Version 1.2
 
 
-#ifdef __FILTER_H__
+#ifndef __FILTER_H__
 #define __FILTER_H__
-#include <stdlib.h>
-
+#include "stdint.h"
 #define DFT_T float   //Setting the default type of this Algorithms
-
-//COM 
 extern DFT_T ABS(DFT_T NUM);
 
 //Range Security 范围保护
@@ -40,7 +37,7 @@ typedef struct
 
 //APIS
 extern uint8_t LimFilterInit(LimFilterObj *p,DFT_T Error);
-extern DFT_T LimFilter(LimFilterObj *p,DFT_T CrtVal);]
+extern DFT_T LimFilter(LimFilterObj *p,DFT_T CrtVal);
 
 //Sliding average filter I 
 //I类滑动平均滤波 适用于采样速度较慢或要求数据更新率较高的实时系统
@@ -91,7 +88,5 @@ typedef struct
 
 extern uint8_t MVFilterInit(MVFilterObj *p,int N);
 extern DFT_T MVfilter(MVFilterObj *p,DFT_T *CrtVal);
-
-
 
 #endif

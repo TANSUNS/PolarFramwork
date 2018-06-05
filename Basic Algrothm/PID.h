@@ -1,11 +1,12 @@
 //Designed By Advanced Stuidos 2018 
 // PID Algorithm  Tang Jun
-
+#include "IncludeList.h"
 
 #ifndef __PID_H__
 #define __PID_H__
 
-
+//PID控制应当具有周期性，应该搭配定时器使用。
+//POAR自带的PID APIS
 typedef struct//PID结构体
 {
     float SetPoint;//设定目标
@@ -23,6 +24,14 @@ extern float PIDCal(PID p,float ThisError,float *out);//PID计算函数
 extern void PIDInit(PID *p,float Pro,float Inte,float Del);//PID初始化函数
 extern void PIDSet(PID *p);//设置PID的参数
 
+//使用ARM DSP库的PID函数库
+typedef struct
+{
+  arm_pid_instance_q15  Ctrl;
+}DSP_PID;
+
+extern float DSP_PIDCal(DSP_PID *p,float CurrentValue);//PID计算函数
+extern void DSP_PIDInit(DSP_PID *p,float Pro,float Inte,float Del);//PID初始化函数
 
 
 
