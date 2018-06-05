@@ -42,7 +42,7 @@ extern uint8_t GroupInterruptInit(IRQn_Type *ChannelTable,int *PriorityTable,int
     {
         if(PriorityTable[i]>=Max)
         {
-            Max=PriorityTable;
+            Max=PriorityTable[i];
             continue;
         }
     }
@@ -57,7 +57,7 @@ extern uint8_t GroupInterruptInit(IRQn_Type *ChannelTable,int *PriorityTable,int
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3);
     if(Max>8||Max<=16)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
-    if(Max>16||MaxPriority<0)
+    if(Max>16||Max<0)
     return 0;
 
 //开始逐个设置
@@ -199,7 +199,7 @@ extern uint8_t PrioritySet(uint32_t MaxPriority)
  *      唐俊于2018-6-5创建 
  */  
 
-Uint8_t SigleInterruptRegister((IRQn_Type Channel,int PriorityTable,int SubPriorityTable)
+uint8_t SigleInterruptRegister(IRQn_Type Channel,int PriorityTable,int SubPriorityTable)
 {
     NVIC_InitTypeDef N;
     N.NVIC_IRQChannelCmd=ENABLE;
@@ -224,10 +224,10 @@ Uint8_t SigleInterruptRegister((IRQn_Type Channel,int PriorityTable,int SubPrior
  * @par 修改日志 
  *      唐俊于2018-6-5创建 
  */  
- uint8_t ResetChannel(u8 Channal,int Priority,int SubPriority)
+uint8_t ResetChannel(IRQn_Type Channel,int Priority,int SubPriority) 
 {
     NVIC_InitTypeDef N;
-    N.NVIC_IRQChannelCmd=ENABLE;//
+    N.NVIC_IRQChannelCmd=ENABLE;
     N.NVIC_IRQChannel=Channel;
     N.NVIC_IRQChannelPreemptionPriority=Priority;
     N.NVIC_IRQChannelSubPriority=SubPriority;
