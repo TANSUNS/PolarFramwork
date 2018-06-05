@@ -60,6 +60,7 @@ DFT_T RangeSecure_I(RgSecrObj *p, DFT_T CrtVal)
     p->Output=CrtVal;
     return p->Output;
 }
+
 //函数名字 RangeSecure_II(RgSecrObj *p, DFT_T CrtVal)
 //函数说明 ：第二类数字范围保护，大于范围取上一次输出值
 //参数 RgSecrObj *p ：需要限定范围参数的结构体 其名字最好与保护参数的名字类似 ：NAME_RS；
