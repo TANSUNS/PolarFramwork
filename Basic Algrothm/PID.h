@@ -4,6 +4,8 @@
 
 #ifndef __PID_H__
 #define __PID_H__
+
+//PID控制应当具有周期性，应该搭配定时器使用。
 //POAR自带的PID APIS
 typedef struct//PID结构体
 {

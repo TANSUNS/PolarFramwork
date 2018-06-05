@@ -1,7 +1,7 @@
 #include "PID.h"
 #include "IncludeList.h"
 
-//不使用DSP库的情况下了PID运算，一般ARM在支持DSP的情况下，不建议使用这个部分
+//不使用DSP库的情况下了PID运算
 float PIDError(PID p,float CurrentValue)
 {
     float out;
