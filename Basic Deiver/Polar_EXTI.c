@@ -352,8 +352,7 @@ void EXTI_GPIO_Config(GPIO_TypeDef *s,GPIO_InitTypeDef G)
 {
             switch((int)s)//设置时钟
             {
-              
-            case (int)GPIOA:
+            case (int)GPIOA : 
             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_AFIO,ENABLE); //开启GPIO时钟并开启复用时钟
             GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,GPIO_PinSource0); //设置中断源
             GPIO_Init(GPIOA,&G); //初始化GPIO
