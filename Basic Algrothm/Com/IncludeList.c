@@ -11,8 +11,10 @@ NVIC_SubPriorityTable[NVIC_Channel_NUM];
 
 
 #ifdef USE_EXTI //外部中断表
+
 #define EXTI_NUM 1//外部中断数
 extern TriggerType TriggerTable[EXTI_NUM];
 extern uint32_t LineTable[EXTI_NUM];
 extern  GPIO_TypeDef *EXTIPortTable[EXTI_NUM];
+
 #endif
