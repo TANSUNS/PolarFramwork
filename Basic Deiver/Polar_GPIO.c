@@ -214,7 +214,6 @@ int Fast_OutputSet(GPIO_TypeDef* GPIOx,uint8_t pin)
 			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 ;
 			break;
 	};
-	CLK_SET(GPIOx);
 	GPIO_Init(GPIOx, &GPIO_InitStructure);
 	
 	return 0;
@@ -299,7 +298,7 @@ int Fast_InputSet(GPIO_TypeDef* GPIOx,uint8_t pin,uint8_t Speed)
 			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 ;
 			break;
 	};
-	CLK_SET(GPIOx);
+	
 	GPIO_Init(GPIOx, &GPIO_InitStructure);
 	return 0;
 }
@@ -325,29 +324,29 @@ Cut_PIN_CLK(uint port)
                端口            
 //端口号  GPIOA_SET GPIOA   GPIOB_SET GPIOB  GPIOC_SET  GPIOC  GPIOD_SET  GPIOD  GPIOE_SET  GPIOE   GPIOF_SET  GPIOF  GPIOG_SET  GPIOG
 */
-int Cut_PIN_CLK(GPIO_TypeDef *port)
+int Cut_PIN_CLK(uint8_t port)
 {
-	switch((int)port)
+	switch(port)
 	{
-		case (int)GPIOA:
+		case 1:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA,ENABLE);
 			break;
-		case (int)GPIOB:
+		case 2:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB,ENABLE);
 			break;
-		case (int)GPIOC:
+		case 3:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC,ENABLE);
 			break;
-		case (int)GPIOD:
+		case 4:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD,ENABLE);
 			break;
-		case (int)GPIOE:
+		case 5:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE,ENABLE);
 			break;
-		case (int)GPIOF:
+		case 6:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF,ENABLE);
 			break;
-		case (int)GPIOG:
+		case 7:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG,ENABLE);
 			break;
 	};
@@ -360,29 +359,29 @@ Reconnect_PIN_CLK(uint port)
 //端口号  GPIOA_SET GPIOA   GPIOB_SET GPIOB  GPIOC_SET  GPIOC  GPIOD_SET  GPIOD  GPIOE_SET  GPIOE   GPIOF_SET  GPIOF  GPIOG_SET  GPIOG
 //使用先决条件 调用 Cut_PIN_CLK(uint port) 之后
 */
-int Reconnect_PIN_CLK(GPIO_TypeDef *port)
+int Reconnect_PIN_CLK(uint8_t port)
 {
-		switch((int)port)
+		switch(port)
 	{
-		case (int)GPIOA:
+		case 1:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA,DISABLE);
 			break;
-		case  (int)GPIOB:
+		case 2:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB,DISABLE);
 			break;
-		case  (int)GPIOC:
+		case 3:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC,DISABLE);
 			break;
-		case  (int)GPIOD:
+		case 4:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD,DISABLE);
 			break;
-		case  (int)GPIOE:
+		case 5:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE,DISABLE);
 			break;
-		case  (int)GPIOF:
+		case 6:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF,DISABLE);
 			break;
-		case  (int)GPIOG:
+		case 7:
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG,DISABLE);
 			break;
 	};
@@ -447,29 +446,29 @@ CLK_SET(uint GPIOX);
                       端口         
 //端口号  GPIOX  GPIOA_SET\GPIOB_SET\GPIOC_SET\GPIOD_SET~~
 */
-void CLK_SET(GPIO_TypeDef *GPIOX)
+void CLK_SET(uint8_t GPIOX)
 {
-	switch((int)GPIOX)
+	switch(GPIOX)
 	{
-		case (int)GPIOA:
+		case 1:
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
 		break;
-		case  (int)GPIOB:
+		case 2:
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
 		break;
-		case (int)GPIOC:
+		case 3:
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
 		break;
-		case (int)GPIOD:
+		case 4:
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD,ENABLE);
 		break;
-		case (int)GPIOE:
+		case 5:
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE,ENABLE);
 		break;
-	    case (int)GPIOF:
+	  case 6:
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF,ENABLE);
 		break;
-		case (int)GPIOG:
+		case 7:
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG,ENABLE);
 		break;
 	}
@@ -481,7 +480,7 @@ OUT_TOGGLE(GPIO_TypeDef* GPIOx,uint16_t pin)
 GPIOx GPIOA GPIOB......
 pin   Pin0 Pin1 Pin2 ......
 */
-void Out_Toggle(GPIO_TypeDef* GPIOx,uint16_t pin)
+void OUT_TOGGLE(GPIO_TypeDef* GPIOx,uint16_t pin)
 {
 	switch(pin)
 	{

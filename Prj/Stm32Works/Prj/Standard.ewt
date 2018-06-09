@@ -2395,6 +2395,9 @@
         <group>
             <name>BasicDriver</name>
             <file>
+                <name>$PROJ_DIR$\..\Apps\BasicDriver\Polar_DMA.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Apps\BasicDriver\Polar_EXTI.c</name>
             </file>
             <file>
