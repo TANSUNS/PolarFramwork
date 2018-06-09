@@ -104,7 +104,6 @@
 /** 定义缺省快捷函数 */ 
 
 #define MEMDEFAULTCHANNAL DMA1_Channel1  ///< 定义数据传输的默认通道 
-
 #define Fast_Mem_ByteDataTransfer(a,b)  Mem_ByteDataTransfer(a,b,MEMDEFAULTCHANNAL) 
 #define Fast_Mem_HalfWordDataTransfer(a,b) Mem_HalfWordDataTransfer(a,b,MEMDEFAULTCHANNAL)
 #define  Fast_Mem_WordDataTransfer(a,b)     Mem_WordDataTransfer(a,b,MEMDEFAULTCHANNAL)

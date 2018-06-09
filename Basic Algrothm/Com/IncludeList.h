@@ -15,7 +15,7 @@
 #define OK (uint8_t) 1
 #define NOTOK (uint8_t)0
 
-
+#define MEMDEFAULTCHANNAL DMA1_Channel1  ///< 定义数据传输的默认通道 
 
  
 //NVIC中断分配表 不用请将其关闭

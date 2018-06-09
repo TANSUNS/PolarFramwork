@@ -127,6 +127,83 @@ void Start_DMA_Convers(DMA_Channel_TypeDef *Channel,uint16_t DataSize) //一次�
 
 uint8_t DMAIsFinish(DMA_Channel_TypeDef *Channel)//判断传输是否完成
 {
+    switch ((int)Channel)
+     {
+         case (int)DMA1_Channel1:
+         if(DMA_GetFlagStatus(DMA1_FLAG_TC1)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA1_Channel2:
+        if(DMA_GetFlagStatus(DMA1_FLAG_TC2)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA1_Channel3:
+        if(DMA_GetFlagStatus(DMA1_FLAG_TC3)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA1_Channel4:
+        if(DMA_GetFlagStatus(DMA1_FLAG_TC4)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA1_Channel5:
+        if(DMA_GetFlagStatus(DMA1_FLAG_TC5)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA1_Channel6:
+        if(DMA_GetFlagStatus(DMA1_FLAG_TC6)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA1_Channel7:
+        if(DMA_GetFlagStatus(DMA1_FLAG_TC7)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA2_Channel1:
+        if(DMA_GetFlagStatus(DMA2_FLAG_TC1)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA2_Channel2:
+        if(DMA_GetFlagStatus(DMA2_FLAG_TC2)==SET)
+         return OK;
+         else
+         return NOTOK;
+         
+         case (int)DMA2_Channel3:
+        if(DMA_GetFlagStatus(DMA2_FLAG_TC3)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA2_Channel4:
+        if(DMA_GetFlagStatus(DMA2_FLAG_TC4)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         case (int)DMA2_Channel5:
+        if(DMA_GetFlagStatus(DMA2_FLAG_TC5)==SET)
+         return OK;
+         else
+         return NOTOK;
+
+         
+     }
+
 
 
 }
@@ -155,9 +232,89 @@ uint8_t DMAIsFinish(DMA_Channel_TypeDef *Channel)//判断传输是否完成
  }
 
  uint8_t DMA_IT_Config(DMA_Channel_TypeDef *Channel,uint32_t WichType) //允许DMA中断，只能被IT组件调用
- {}
- uint8_t Clea_DMA_IT_Flag(DMA_Channel_TypeDef *Channel) //清除中断FLAG函数
- {}
+ {
+     
+       if(WichType==AfterFinish)
+       {
+        DMA_ITConfig(Channel,DMA_IT_TC,ENABLE);
+        return OK;
+       }
+        
+        else if(WichType==WhenWrong)
+        {
+        DMA_ITConfig(Channel,DMA_IT_TE,ENABLE);
+        return OK;
+        }
+        else 
+        return NOTOK;
+ }
+ uint8_t Clear_DMA_IT_Flag(DMA_Channel_TypeDef *Channel) //清除中断FLAG函数
+ {
+         switch ((int)Channel)
+     {
+         case (int)DMA1_Channel1:
+              DMA_ClearFlag(DMA1_FLAG_GL1);
+              DMA_ClearFlag(DMA1_FLAG_TC1);
+              break;
+
+         case (int)DMA1_Channel2:
+              DMA_ClearFlag(DMA1_FLAG_GL2);
+              DMA_ClearFlag(DMA1_FLAG_TC2);
+              break;
+
+         case (int)DMA1_Channel3:
+              DMA_ClearFlag(DMA1_FLAG_GL3);
+              DMA_ClearFlag(DMA1_FLAG_TC3);
+              break;
+
+         case (int)DMA1_Channel4:
+              DMA_ClearFlag(DMA1_FLAG_GL4);
+              DMA_ClearFlag(DMA1_FLAG_TC4);
+              break;
+
+         case (int)DMA1_Channel5:
+              DMA_ClearFlag(DMA1_FLAG_GL5);
+              DMA_ClearFlag(DMA1_FLAG_TC5);
+              break;
+
+         case (int)DMA1_Channel6:
+              DMA_ClearFlag(DMA1_FLAG_GL6);
+              DMA_ClearFlag(DMA1_FLAG_TC6);
+              break;
+
+         case (int)DMA1_Channel7:
+              DMA_ClearFlag(DMA1_FLAG_GL7);
+              DMA_ClearFlag(DMA1_FLAG_TC7);
+              break;
+
+         case (int)DMA2_Channel1:
+              DMA_ClearFlag(DMA2_FLAG_GL1);
+              DMA_ClearFlag(DMA2_FLAG_TC1);
+              break;
+
+         case (int)DMA2_Channel2:
+              DMA_ClearFlag(DMA2_FLAG_GL2);
+              DMA_ClearFlag(DMA2_FLAG_TC2);
+              break;
+         
+         case (int)DMA2_Channel3:
+              DMA_ClearFlag(DMA2_FLAG_GL3);
+              DMA_ClearFlag(DMA2_FLAG_TC3);
+              break;
+
+         case (int)DMA2_Channel4:
+              DMA_ClearFlag(DMA2_FLAG_GL4);
+              DMA_ClearFlag(DMA2_FLAG_TC4);
+              break;
+
+         case (int)DMA2_Channel5:
+              DMA_ClearFlag(DMA2_FLAG_GL5);
+              DMA_ClearFlag(DMA2_FLAG_TC5);
+              break;
+     }
+     return OK;
+
+ }
 
 static void PeriphDMAInit(void)        //外设响应允许通道
 {
