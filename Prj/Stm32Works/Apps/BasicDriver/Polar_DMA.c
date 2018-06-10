@@ -3,24 +3,34 @@
 
 uint8_t DMA_INIT(DMA_Channel_TypeDef *Channel,uint8_t Level,uint32_t DataNum,uint32_t PeriAdr,uint32_t PeriByte,uint8_t PeriInc,uint32_t MemAdr,uint32_t MemByte,uint8_t MemInc,Who_To_Who Way,uint8_t CircleFlag)
 {
+	
+	
     DMA_InitTypeDef D;
+	
+	  DMA_DeInit(Channel);
+	
     D.DMA_PeripheralBaseAddr=PeriAdr; //设置基本的地址
+	
     D.DMA_MemoryBaseAddr=MemAdr;
-    D.DMA_BufferSize=DataNum;      //设置数据量
+	
+    D.DMA_BufferSize=DataNum;  
+	    //设置数据量
     switch (CircleFlag)
     {
         case Circle:
         D.DMA_Mode=DMA_Mode_Circular;
+				break;
         case Onece:
         D.DMA_Mode=DMA_Mode_Normal;
+				break;
     }  
     switch (MemInc) //设置地址增加与否
     {
         case Inc:
-        D.DMA_MemoryInc=DMA_PeripheralInc_Enable;
+        D.DMA_MemoryInc=DMA_MemoryInc_Enable;
         break;
         case Hold:
-        D.DMA_MemoryInc=DMA_PeripheralInc_Disable;
+        D.DMA_MemoryInc=DMA_MemoryInc_Disable;
         break;
         }
 
@@ -30,7 +40,7 @@ uint8_t DMA_INIT(DMA_Channel_TypeDef *Channel,uint8_t Level,uint32_t DataNum,uin
         D.DMA_PeripheralInc=DMA_PeripheralInc_Enable;
         break;
         case Hold:
-        D.DMA_PeripheralInc=DMA_PeripheralInc_Disable;\
+        D.DMA_PeripheralInc=DMA_PeripheralInc_Disable;
         break;
         }
     
@@ -86,13 +96,13 @@ uint8_t DMA_INIT(DMA_Channel_TypeDef *Channel,uint8_t Level,uint32_t DataNum,uin
     switch (MemByte)
     {
         case Bytes:
-        D.DMA_PeripheralDataSize=DMA_PeripheralDataSize_Byte;
+        D.DMA_MemoryDataSize=DMA_MemoryDataSize_Byte;
         break;
         case HalfWords:
-        D.DMA_PeripheralDataSize=DMA_PeripheralDataSize_HalfWord;
+        D.DMA_MemoryDataSize=DMA_MemoryDataSize_HalfWord;
         break;
         case Words:
-        D.DMA_PeripheralDataSize=DMA_PeripheralDataSize_Word;
+        D.DMA_MemoryDataSize=DMA_MemoryDataSize_Word;
         break;
 
     }

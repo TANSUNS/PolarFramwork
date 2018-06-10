@@ -90,20 +90,21 @@
 #define TIM8_CH2 DMA2_Channel5
 
 /** 定义常用外设地址 */ 
-#define ADC1_Data_Address (uint32_t)&ADC1->DR///< ADC1数据地址
-#define ADC2_Data_Address (uint32_t)&ADC2->DR///< ADC2数据地址
-#define ADC3_Data_Address (uint32_t)&ADC3->DR///< ADC3数据地址
-#define USART1_Data_Address (uint32_t)&USART1->DR///< USART1数据地址
-#define USART2_Data_Address (uint32_t)&USART2->DR///< USART2数据地址
-#define DAC1_8bit_Data_Address (uint32_t)&DAC1->DHR8R1///< DAC1 8位数据地址
-#define DAC1_12bit_Data_Address (uint32_t)&DAC2->DHR12R1///<DAC1 12位数据地址
-#define DAC2_8bit_Data_Address (uint32_t)&DAC1->DHR8R2///< DAC2 8位数据地址
-#define DAC2_12bit_Data_Address (uint32_t)&DAC2->DHR12R2///<DAC2 12位数据地址
+#define ADC1_Data_Address (uint32_t)(&ADC1->DR)///< ADC1数据地址
+#define ADC2_Data_Address (uint32_t)&(ADC2->DR)///< ADC2数据地址
+#define ADC3_Data_Address (uint32_t)&(ADC3->DR)///< ADC3数据地址
+#define USART1_Data_Address (uint32_t)&(USART1->DR)///< USART1数据地址
+#define USART2_Data_Address (uint32_t)&(USART2->DR)///< USART2数据地址
+#define DAC1_8bit_Data_Address (uint32_t)&(DAC1->DHR8R1)///< DAC1 8位数据地址
+#define DAC1_12bit_Data_Address (uint32_t)&(DAC2->DHR12R1)///<DAC1 12位数据地址
+#define DAC2_8bit_Data_Address (uint32_t)&(DAC1->DHR8R2)///< DAC2 8位数据地址
+#define DAC2_12bit_Data_Address (uint32_t)&(DAC2->DHR12R2)///<DAC2 12位数据地址
 
 
 /** 定义缺省快捷函数 */ 
 
 #define MEMDEFAULTCHANNAL DMA1_Channel1  ///< 定义数据传输的默认通道 
+
 #define Fast_Mem_ByteDataTransfer(a,b)  Mem_ByteDataTransfer(a,b,MEMDEFAULTCHANNAL) 
 #define Fast_Mem_HalfWordDataTransfer(a,b) Mem_HalfWordDataTransfer(a,b,MEMDEFAULTCHANNAL)
 #define  Fast_Mem_WordDataTransfer(a,b)     Mem_WordDataTransfer(a,b,MEMDEFAULTCHANNAL)
