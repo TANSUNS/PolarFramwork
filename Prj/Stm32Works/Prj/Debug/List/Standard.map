@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.20.2.14835/W32 for ARM                07/Jun/2018  12:30:40
+# IAR ELF Linker V8.20.2.14835/W32 for ARM                12/Jun/2018  21:56:01
 # Copyright 2007-2017 IAR Systems AB.
 #
 #    Output file  =  
@@ -8,7 +8,7 @@
 #    Map file     =  
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\List\Standard.map
 #    Command line =  
-#        -f C:\Users\tansu\AppData\Local\Temp\EWE0F0.tmp
+#        -f C:\Users\tansu\AppData\Local\Temp\EWA420.tmp
 #        (C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\core_cm3.o
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\Filter.o
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\FIR_Filter.o
@@ -20,6 +20,7 @@
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\Polar_EXTI.o
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\Polar_GPIO.o
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\Polar_IT.o
+#        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\Polar_SPI.o
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\startup_stm32f10x_hd.o
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\stm32f10x_adc.o
 #        C:\Users\tansu\Desktop\PolarFramwork\Prj\Stm32Works\Prj\Debug\Obj\stm32f10x_bkp.o

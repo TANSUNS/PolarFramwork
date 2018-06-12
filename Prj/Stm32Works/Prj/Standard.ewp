@@ -2096,6 +2096,12 @@
             <file>
                 <name>$PROJ_DIR$\..\Apps\BasicDriver\Polar_IT_Function.h</name>
             </file>
+            <file>
+                <name>$PROJ_DIR$\..\Apps\BasicDriver\Polar_SPI.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Apps\BasicDriver\Polar_SPI.h</name>
+            </file>
         </group>
         <group>
             <name>Com</name>
