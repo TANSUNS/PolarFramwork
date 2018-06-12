@@ -10,6 +10,7 @@
 //编译开关定义
 #define USE_ITRRUPT //使用中断
 #define USE_EXTI //使用外部中断
+#define USE_SPI //使用SPI
 
 //函数返回状态定义
 #define OK (uint8_t) 1
@@ -18,6 +19,11 @@
 #define MEMDEFAULTCHANNAL DMA1_Channel1  ///< 定义数据传输的默认通道 
 
  
+ //SPI 通道分配表，不用请关闭
+ #ifdef USE_SPI
+ #define SPI1_Port GPIOA
+
+ #endif
 //NVIC中断分配表 不用请将其关闭
 #ifdef USE_ITRRUPT 
 #define NVIC_Channel_NUM 1 //申请的中断数

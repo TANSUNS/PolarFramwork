@@ -1,5 +1,5 @@
-#ifndef __ADC_H__
-#define __ADC_H__
+#ifndef __POLAR_ADC_H__
+#define __POLAR_ADC_H__
 
 #ifdef __cplusplus
  extern "C" {
@@ -12,29 +12,29 @@
 #define uchar unsigned char
 /******************************************/
 /*********/
-/*×¢Òâ µ¥Í¨µÀÊ¹ÓÃÖÐ¶Ï·½Ê½µ÷ÓÃÏÞÓÚADC2*/
-/*¶àÍ¨µÀ½öÏÞDMA¶ÁÈ¡ÇÒÎªADC1ºÍADC3*/
-/*µ¥Í¨µÀDMA¶ÁÈ¡½öÏÞÓÚADC3*/
+/*×¢ï¿½ï¿½ ï¿½ï¿½Í¨ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ð¶Ï·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ADC2*/
+/*ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DMAï¿½ï¿½È¡ï¿½ï¿½ÎªADC1ï¿½ï¿½ADC3*/
+/*ï¿½ï¿½Í¨ï¿½ï¿½DMAï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ADC3*/
 /*********/
 /******************************************/
-//²ÎÊý¶¨Òå
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 typedef struct
 {
 	uint16_t ADC_DMA_MUL_DATA[8];
 }ADC_DMA_MUL_GET;
 
 #define    ADC_IRQ                       ADC1_2_IRQn
-//·µ»Ø±äÁ¿ÉùÃ÷
+//ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-extern void NVIC_AD(uint32_t group,uint8_t main,uint8_t sub,uint8_t IRQchannel);//ADCµÄÖÐ¶ÏÉèÖÃº¯Êý
-extern void ADC_INIT_Single_Channel(uint8_t ADCx,uint8_t Channel);//ADCµ¥Í¨µÀ³õÊ¼»¯º¯Êý
-extern void ADC_INIT_Multiple_Channels(uint8_t ADCx,uint8_t CH_NUM,uint8_t GPIOx);//ADC¶àÍ¨µÀ³õÊ¼»¯º¯Êý
-extern void ADC_COL(ADC_TypeDef* ADCx,FunctionalState NewState);//ADC¿ØÖÆº¯Êý£¬¿ØÖÆADC¶ÁÈ¡µÄ¿ªÊ¼ºÍ½áÊø
-extern uint16_t ADC_Get_Single_Channel(ADC_TypeDef *Channel);//ADC»ñµÃº¯Êý  ÖÐ¶Ï·½Ê½
-extern void ADC_Single_DMA_Config(uint channel,uint GPIOx_ADC1,uint AD_NUM);//ADCµ¥Í¨µÀDMA»ñÈ¡³õÊ¼»¯º¯Êý
-extern uint16_t DMA_AD_SC(uint AD_NUM);//ADCµ¥Í¨µÀDMA¶ÁÈ¡
-extern uint16_t DMA_AD_MCS(uint ADCx);//ADC¶àÍ¨µÀDMA¶ÁÈ¡
-extern uint16_t ADC_Require(uint ADC_Mode,uint ADCx,uint channel,uint AD_NUM);//ADC²éÑ¯º¯Êý
+extern void NVIC_AD(uint32_t group,uint8_t main,uint8_t sub,uint8_t IRQchannel);//ADCï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½
+extern void ADC_INIT_Single_Channel(uint8_t ADCx,uint8_t Channel);//ADCï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+extern void ADC_INIT_Multiple_Channels(uint8_t ADCx,uint8_t CH_NUM,uint8_t GPIOx);//ADCï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+extern void ADC_COL(ADC_TypeDef* ADCx,FunctionalState NewState);//ADCï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ADCï¿½ï¿½È¡ï¿½Ä¿ï¿½Ê¼ï¿½Í½ï¿½ï¿½ï¿½
+extern uint16_t ADC_Get_Single_Channel(ADC_TypeDef *Channel);//ADCï¿½ï¿½Ãºï¿½ï¿½ï¿½  ï¿½Ð¶Ï·ï¿½Ê½
+extern void ADC_Single_DMA_Config(uint channel,uint GPIOx_ADC1,uint AD_NUM);//ADCï¿½ï¿½Í¨ï¿½ï¿½DMAï¿½ï¿½È¡ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+extern uint16_t DMA_AD_SC(uint AD_NUM);//ADCï¿½ï¿½Í¨ï¿½ï¿½DMAï¿½ï¿½È¡
+extern uint16_t DMA_AD_MCS(uint ADCx);//ADCï¿½ï¿½Í¨ï¿½ï¿½DMAï¿½ï¿½È¡
+extern uint16_t ADC_Require(uint ADC_Mode,uint ADCx,uint channel,uint AD_NUM);//ADCï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 
 #endif
 	
