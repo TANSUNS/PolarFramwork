@@ -36,6 +36,24 @@
 #define pin15                       15
 #define pin16                       16
 
+#define Pin0                         GPIO_Pin_0
+#define Pin1                         GPIO_Pin_1
+#define Pin2                         GPIO_Pin_2
+#define Pin3                         GPIO_Pin_3
+#define Pin4                         GPIO_Pin_4
+#define Pin5                         GPIO_Pin_5
+#define Pin6                         GPIO_Pin_6
+#define Pin7                         GPIO_Pin_7
+#define Pin8                         GPIO_Pin_8
+#define Pin9                         GPIO_Pin_9
+#define Pin10                        GPIO_Pin_10
+#define Pin11                        GPIO_Pin_11
+#define Pin12                        GPIO_Pin_12
+#define Pin13                        GPIO_Pin_13
+#define Pin14                        GPIO_Pin_14
+#define Pin15                        GPIO_Pin_15
+
+
 
 #define LOW_Speed                    2
 #define MID_Speed                   10

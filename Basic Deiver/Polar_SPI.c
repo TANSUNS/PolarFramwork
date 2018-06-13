@@ -202,7 +202,7 @@ uint8_t SPISendByteData(SPI_TypeDef* SPIx,uint8_t *Data,uint16_t Channel)///< ä¼
         if((i--)==0)
         return NOTOK;
     }
-    for(i=0;i<=DataSize;i++)
+    for(i=0;i<DataSize;i++)
     {
     SPI_I2S_SendData(SPIx,Data[i]);
     }
@@ -222,7 +222,7 @@ uint8_t SPISendHalfWordData(SPI_TypeDef* SPIx,uint16_t *Data,uint16_t Channel)//
         if((i--)==0)
         return NOTOK;
     }
-    for(i=0;i<=DataSize;i++)
+    for(i=0;i<DataSize;i++)
     {
     SPI_I2S_SendData(SPIx,Data[i]);
     }
@@ -240,7 +240,7 @@ uint8_t SPIGetByteData(SPI_TypeDef* SPIx,uint8_t *Buffer,uint16_t Channel)///<èŽ
         if((i--)==0)
         return NOTOK;
     }
-    for(i=0;i<=DataSize;i++)
+    for(i=0;i<DataSize;i++)
     {
     Buffer[i]=SPI_I2S_ReceiveData(SPIx);
     }
@@ -258,7 +258,7 @@ uint8_t SPIGetHalfDate(SPI_TypeDef* SPIx,uint16_t *Buffer,uint16_t Channel)///< 
         if((i--)==0)
         return NOTOK;
     }
-    for(i=0;i<=DataSize;i++)
+    for(i=0;i<DataSize;i++)
     {
     Buffer[i]=SPI_I2S_ReceiveData(SPIx);
     }
@@ -278,7 +278,7 @@ uint8_t SPISend_Get(SPI_TypeDef* SPIx,uint16_t Channel,uint16_t *Data,uint16_t *
         if((i--)==0)
         return NOTOK;
     }
-    for(i=0;i<=DataSize;i++)
+    for(i=0;i<DataSize;i++)
     {
     SPI_I2S_SendData(SPIx,Data[i]);
     }
@@ -292,7 +292,7 @@ uint8_t SPISend_Get(SPI_TypeDef* SPIx,uint16_t Channel,uint16_t *Data,uint16_t *
         if((i--)==0)
         return NOTOK;
     }
-    for(i=0;i<=DataSize;i++)
+    for(i=0;i<DataSize;i++)
     {
     Buffer[i]=SPI_I2S_ReceiveData(SPIx);
     }

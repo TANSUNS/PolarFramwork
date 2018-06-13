@@ -39,4 +39,6 @@ extern uint32_t LineTable[EXTI_NUM];
 extern  GPIO_TypeDef *EXTIPortTable[EXTI_NUM];
 #endif
 
+extern void delay_ms(u32 time); //软件定时函数
+extern *uint8_t TEST_8_Bit(uint8_t Data);
 #endif

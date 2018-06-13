@@ -5,5 +5,6 @@
 #include "Polar_EXTI.h"
 #include "includeList.h"
 #include "Polar_IT_Function.h"
+#include "PeriphDef.h"
 
 #endif

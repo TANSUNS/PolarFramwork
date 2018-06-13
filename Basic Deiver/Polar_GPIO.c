@@ -145,7 +145,7 @@ int GPIO_INIT(GPIO_TypeDef* GPIOx,uint16_t pin,uint8_t Speed,uint8_t mode)
 			GPIO_CON.GPIO_Mode = GPIO_Mode_AF_PP;
 			break;
 		};
-	
+	CLK_SET(GPIOx);
 	GPIO_Init(GPIOx, &GPIO_InitStructure);
 	return 0;
 	 
@@ -214,6 +214,7 @@ int Fast_OutputSet(GPIO_TypeDef* GPIOx,uint8_t pin)
 			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 ;
 			break;
 	};
+	CLK_SET(GPIOx);
 	GPIO_Init(GPIOx, &GPIO_InitStructure);
 	
 	return 0;
@@ -298,7 +299,7 @@ int Fast_InputSet(GPIO_TypeDef* GPIOx,uint8_t pin,uint8_t Speed)
 			GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 ;
 			break;
 	};
-	
+	CLK_SET(GPIOx);
 	GPIO_Init(GPIOx, &GPIO_InitStructure);
 	return 0;
 }
@@ -324,32 +325,23 @@ Cut_PIN_CLK(uint port)
                端口            
 //端口号  GPIOA_SET GPIOA   GPIOB_SET GPIOB  GPIOC_SET  GPIOC  GPIOD_SET  GPIOD  GPIOE_SET  GPIOE   GPIOF_SET  GPIOF  GPIOG_SET  GPIOG
 */
-int Cut_PIN_CLK(uint8_t port)
+int Cut_PIN_CLK(GPIO_TypeDef *Port)
 {
-	switch(port)
-	{
-		case 1:
-			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA,ENABLE);
-			break;
-		case 2:
+    	if(GPIOx==GPIOA)
+	   		RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA,ENABLE);
+		else if(GPIOx==GPIOB)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB,ENABLE);
-			break;
-		case 3:
+		else if(GPIOx==GPIOC)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC,ENABLE);
-			break;
-		case 4:
+		else if(GPIOx==GPIOD)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD,ENABLE);
-			break;
-		case 5:
+		else if(GPIOx==GPIOE)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE,ENABLE);
-			break;
-		case 6:
+		else if(GPIOx==GPIOF)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF,ENABLE);
-			break;
-		case 7:
+		else if(GPIOx==GPIOG)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG,ENABLE);
-			break;
-	};
+
 	return 0;
 }
  /*
@@ -359,32 +351,25 @@ Reconnect_PIN_CLK(uint port)
 //端口号  GPIOA_SET GPIOA   GPIOB_SET GPIOB  GPIOC_SET  GPIOC  GPIOD_SET  GPIOD  GPIOE_SET  GPIOE   GPIOF_SET  GPIOF  GPIOG_SET  GPIOG
 //使用先决条件 调用 Cut_PIN_CLK(uint port) 之后
 */
-int Reconnect_PIN_CLK(uint8_t port)
+int Reconnect_PIN_CLK(GPIO_InitTypeDef *GPIOx)
 {
-		switch(port)
-	{
-		case 1:
-			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA,DISABLE);
-			break;
-		case 2:
+
+         
+    	if(GPIOx==GPIOA)
+	   		RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA,DISABLE);
+		else if(GPIOx==GPIOB)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB,DISABLE);
-			break;
-		case 3:
+		else if(GPIOx==GPIOC)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC,DISABLE);
-			break;
-		case 4:
+		else if(GPIOx==GPIOD)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD,DISABLE);
-			break;
-		case 5:
+		else if(GPIOx==GPIOE)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE,DISABLE);
-			break;
-		case 6:
+		else if(GPIOx==GPIOF)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF,DISABLE);
-			break;
-		case 7:
+		else if(GPIOx==GPIOG)
 			RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG,DISABLE);
-			break;
-	};
+
 	return 0;
 }
  /*
@@ -446,32 +431,24 @@ CLK_SET(uint GPIOX);
                       端口         
 //端口号  GPIOX  GPIOA_SET\GPIOB_SET\GPIOC_SET\GPIOD_SET~~
 */
-void CLK_SET(uint8_t GPIOX)
+void CLK_SET(GPIO_TypeDef *GPIOx)
 {
-	switch(GPIOX)
-	{
-		case 1:
+
+		if(GPIOx==GPIOA)
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-		break;
-		case 2:
+	    else if(GPIOx==GPIOB)
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);
-		break;
-		case 3:
+		else if(GPIOx==GPIOC)
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
-		break;
-		case 4:
+		else if(GPIOx==GPIOD)
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD,ENABLE);
-		break;
-		case 5:
+		else if(GPIOx==GPIOE)
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE,ENABLE);
-		break;
-	  case 6:
+		else if(GPIOx==GPIOF)
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF,ENABLE);
-		break;
-		case 7:
+		else if(GPIOx==GPIOG)
 	      RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOG,ENABLE);
-		break;
-	}
+
 }
 /*
 输出反转函数
